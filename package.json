@@ -5,14 +5,25 @@
   "main": "src/app/server.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/app/server.js"
+    "dev": "node src/app/server.js",
+    "prod": "nodemon src/app/server.js",
+    "clear": "sh clear.sh"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Between-freedom-and-Space/Web-Backend-Facade.git"
   },
   "author": "Matvey Popov",
+  "contributors": [
+    {
+      "name": "Matvey Popov",
+      "url": "https://github.com/Ferum-bot"
+    },
+    {
+      "name": "Stanislav Klokov",
+      "url": "https://github.com/JUSSIAR"
+    }
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Between-freedom-and-Space/Web-Backend-Facade/issues"
@@ -25,5 +36,8 @@
     "express": "^4.18.1",
     "multer": "^1.4.5-lts.1",
     "node-fetch": "^3.2.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
   }
 }
