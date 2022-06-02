@@ -1,7 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import {postPageAdapter} from "../pages/post-page/post-page-adapter.js";
-import multipleFetch from 'multiple-fetch'
 
 const app = express()
 
