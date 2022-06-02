@@ -8,3 +8,5 @@
 * Create `.env` file in the root project/
 
 #### Created and Powered by Ferum-bot.
+
+#### Co-author JUSSIAR
