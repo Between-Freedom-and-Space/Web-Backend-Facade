@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "node src/app/server.js",
     "prod": "nodemon src/app/server.js",
-    "clear": "sh clear.sh"
+    "clear": "sh clear.sh",
+    "env": "cp .env.example .env"
   },
   "repository": {
     "type": "git",
