@@ -1,0 +1,1 @@
+export const AUTH_TOKEN_HEADER_NAME = "X-Authenticate-Token"
