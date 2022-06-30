@@ -1,9 +1,23 @@
+/**
+ * MultipleFetch class.
+ * @author Stanislav Klokov
+ * @version v1.0.0
+ */
 export class MultipleFetch {
+    /**
+     * Constructs MultipleFetch instance.
+     * @param log logger enable flag.
+     */
     constructor(log = false) {
         this.fetchCount = 0
         this.loggerStatus = log
     }
 
+    /**
+     * Starts async process.
+     * @param callback fetch function.
+     * @returns {Response}
+     */
     run(callback = async () => {}) {
         this.fetchCount++
         return new Response({
@@ -14,7 +28,18 @@ export class MultipleFetch {
     }
 }
 
+/**
+ * Response class.
+ * @author Stanislav Klokov
+ * @version v1.0.0
+ */
 export class Response {
+    /**
+     * Constructs Response instance.
+     * @param callback fetch function.
+     * @param log logger enable flag.
+     * @param id process id.
+     */
     constructor({callback, log, id}) {
         this.promise = new Promise(resolve => resolve(undefined))
         try {
@@ -26,16 +51,34 @@ export class Response {
         }
     }
 
+    /**
+     * Syncs fetch and resolves promise.
+     * @returns {Promise<*>}
+     */
     synchronize = async () => {
         return await this.promise
     }
 }
 
+/**
+ * Logger class.
+ * @author Stanislav Klokov
+ * @version v1.0.0
+ */
 class Logger {
+    /**
+     * Logger engine.
+     * @returns {{fail: (function(*, *): void), success: (function(*): void), start: (function(*): void)}}
+     */
     static log = () => ({
+        // Process starting log
         start: id => console.log(`Process: ${id} started`),
+
+        // Process success log
         success: id => console.log(`Process: ${id} succeed`),
-        fail: (id, err) => console.warn(`Process ${id} failed with ${err}`)
+
+        // Process fail log (with reason)
+        fail: (id, err) => console.warn(`Process: ${id} failed with error: ${err}`),
     })
 }
 
