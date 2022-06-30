@@ -1,3 +1,3 @@
-import {multipleFetch} from './multiple-fetch.js'
+import {MultipleFetch, Response} from './multiple-fetch.js'
 
-export default multipleFetch
+export {MultipleFetch, Response}

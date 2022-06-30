@@ -1,26 +1,50 @@
-import multipleFetch from 'multiple-fetch'
+import {MultipleFetch, Response} from 'multiple-fetch'
 
-describe('multipleFetch', () => {
-    it('should be defined as a function', () => {
-        expect(multipleFetch).toBeInstanceOf(Function)
+describe('MultipleFetch', () => {
+    let mFetch = undefined
+
+    beforeEach(() => {
+        mFetch = new MultipleFetch(false)
     })
 
-    it('should returns an object with the same keys', () => {
-        const objectParam = {key1: {}, key2: {}, key3: {}}
-        const transform = (object) => JSON.stringify(Object.keys(object).sort())
-
-        const expected = transform(objectParam)
-        const received = transform(multipleFetch(objectParam))
-        expect(received).toBe(expected)
+    it('should be defined as a class', () => {
+        expect(MultipleFetch).toBeDefined()
     })
 
-    it('should returns an empty object for falsy argument', () => {
-        expect(multipleFetch()).toBeInstanceOf(Object);
-        expect(multipleFetch(undefined)).toBeInstanceOf(Object);
-        expect(multipleFetch(null)).toBeInstanceOf(Object);
+    it('should sets loggerStatus', () => {
+        expect(mFetch.loggerStatus).toBeFalsy()
+    })
 
-        expect(Object.entries(multipleFetch())).toHaveLength(0);
-        expect(Object.entries(multipleFetch(undefined))).toHaveLength(0);
-        expect(Object.entries(multipleFetch(null))).toHaveLength(0);
+    it.each([
+        ['loggerStatus'],
+        ['fetchCount']
+    ])('object should contains %s', (key) => {
+        expect(Object.keys(mFetch)).toContain(key)
+    })
+
+    it('run should returns an object of Response', () => {
+        const testFetch = () => new Promise(resolve => resolve(true))
+        expect(mFetch.run(testFetch)).toBeInstanceOf(Response)
+    })
+
+    it('should works with more than one case', async () => {
+        const array = new Array(0)
+        for (let id = 1; id <= 5; id++) {
+            array.push(mFetch.run(() => new Promise(resolve => {
+                const timeout = setTimeout(() => {
+                    resolve(id)
+                    clearTimeout(timeout)
+                }, id * 1000)
+            })))
+
+            // Checks adding fetch for running with fetchCount
+            expect(mFetch.fetchCount).toBe(id)
+        }
+
+        // Checking for every process has it's resolved value
+        array.forEach(async (item, id) => {
+            const synced = await item.synchronize()
+            expect(synced).toBe(id + 1)
+        })
     })
 })
