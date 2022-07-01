@@ -1,0 +1,10 @@
+{
+  "name": "multiple-fetch",
+  "version": "1.0.0",
+  "author": {
+    "name": "Stanislav Klokov",
+    "url": "https://github.com/JUSSIAR"
+  },
+  "main": "index.js",
+  "type": "module"
+}
