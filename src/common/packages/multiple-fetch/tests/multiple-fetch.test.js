@@ -1,4 +1,5 @@
-import {MultipleFetch, Response} from 'multiple-fetch'
+import {MultipleFetch} from "../models/multiple-fetch";
+import {Response} from "../models/response";
 
 describe('MultipleFetch', () => {
     let mFetch = undefined

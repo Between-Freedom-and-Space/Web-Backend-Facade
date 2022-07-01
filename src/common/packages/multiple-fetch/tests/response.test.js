@@ -1,4 +1,4 @@
-import {Response} from 'multiple-fetch'
+import {Response} from "../models/response";
 
 const RESOLVE = 'test'
 
