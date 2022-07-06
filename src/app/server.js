@@ -1,6 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import {postPageAdapter} from "../pages/post-page/post-page-adapter.js";
+import {postPageAdapter} from "../pages/post/post-page-controller.js";
 
 const app = express()
 

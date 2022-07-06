@@ -1,3 +1,5 @@
+// noinspection DuplicatedCode
+
 import fetch from "node-fetch";
 import {AUTH_TOKEN_HEADER_NAME} from "../common/headers/headers-names";
 
