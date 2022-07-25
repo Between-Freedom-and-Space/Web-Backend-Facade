@@ -11,11 +11,13 @@ router.post("/authentication/refresh/access/token", (req, res) => {
     const result = controller.refreshAccessToken(token)
 })
 
-router.post("/authentication/authenticate", (req, res) => {
+router.post("/authentication/authenticate", async (req, res) => {
     const login = req.body["login"]
     const passwordEncoded = req.body["password_encoded"]
 
-    const result = controller.authenticateUser(login, passwordEncoded)
+    const result = await controller.authenticateUser(login, passwordEncoded)
+
+    res.send(result)
 })
 
 export default router;

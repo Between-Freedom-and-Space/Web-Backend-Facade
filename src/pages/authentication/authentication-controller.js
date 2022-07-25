@@ -23,9 +23,10 @@ class AuthenticationController {
         const authenticateFetch = authApiEndpoints.authenticateUser
         const multiplyFetch = new MultipleFetch(this.#ENABLE_LOGS)
 
-        const result = await multiplyFetch
-            .run(() => authenticateFetch(authenticateRequestBody))
+        return await multiplyFetch
+            .run(() => authenticateFetch({body: authenticateRequestBody}))
             .synchronize()
+            .then(data => data.json())
     }
 }
 

@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 import {AUTH_TOKEN_HEADER_NAME} from "../common/headers/headers-names.js";
-import {createGetBasePath} from "../common/helpers/api-helper.js";
+import {createGetBasePath} from "../common/helpers/api-helpers.js";
 
 const getBasePath = createGetBasePath("/auth")
 
@@ -19,6 +19,7 @@ const authenticateUser = async (params) => {
     const { body } = params
     return fetch(path, {
         method: "POST",
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(body)
     })
 }
