@@ -20,12 +20,9 @@ const getAllProfiles = async (params) => {
 
 const checkProfileExists = async (params) => {
     const path = basePath + "/exists"
-    const { token, body } = params
+    const { body } = params
     return fetch(path, {
         method: "POST",
-        headers: {
-            [AUTH_TOKEN_HEADER_NAME]: token
-        },
         body: JSON.stringify(body)
     })
 }
@@ -202,7 +199,7 @@ const deleteProfile = async (nickname, params) => {
     })
 }
 
-export const ProfilesApiEndpoints = {
+export const profilesApiEndpoints = {
     getAllProfiles,
     checkProfileExists,
     subscribeToProfile,
