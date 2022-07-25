@@ -8,7 +8,7 @@ class RegistrationController {
 
     async checkNicknameExists(nickname) {
         const existsRequestBody = {
-            "profile_nickname": nickname
+            profile_nickname: nickname
         }
         const existsFetch = profilesApiEndpoints.checkProfileExists
         const multipleFetch = new MultipleFetch(this.#ENABLE_LOGS)
@@ -20,7 +20,7 @@ class RegistrationController {
 
     async sendEmailVerificationCode(email) {
         const verificationRequestBody = {
-            "email": email
+            email: email
         }
         const sendFetch = authApiEndpoints.sendEmailVerificationCode
         const multipleFetch = new MultipleFetch(this.#ENABLE_LOGS)
@@ -32,7 +32,7 @@ class RegistrationController {
 
     async sendPhoneVerificationCode(phoneNumber) {
         const verificationRequestBody = {
-            "phone_number": phoneNumber
+            phone_number: phoneNumber
         }
         const sendFetch = authApiEndpoints.sendPhoneVerificationCode
         const multipleFetch = new MultipleFetch(this.#ENABLE_LOGS)
@@ -44,8 +44,8 @@ class RegistrationController {
 
     async validateEmailVerificationCode(email, code) {
         const validateRequestBody = {
-            "email": email,
-            "verification_code": code
+            email: email,
+            verification_code: code
         }
         const validateFetch = authApiEndpoints.verifyEmailVerificationCode
         const multipleFetch = new MultipleFetch(this.#ENABLE_LOGS)
@@ -57,8 +57,8 @@ class RegistrationController {
 
     async validatePhoneVerificationCode(phone, code) {
         const validateRequestBody = {
-            "phone_number": phone,
-            "verification_code": code
+            phone_number: phone,
+            verification_code: code
         }
         const validateFetch = authApiEndpoints.verifyPhoneVerificationCode
         const multipleFetch = new MultipleFetch(this.#ENABLE_LOGS)

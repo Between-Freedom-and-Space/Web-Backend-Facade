@@ -16,8 +16,8 @@ class AuthenticationController {
 
     async authenticateUser(login, password) {
         const authenticateRequestBody = {
-            "nickname": login,
-            "password_encoded": password
+            nickname: login,
+            password_encoded: password
         }
 
         const authenticateFetch = authApiEndpoints.authenticateUser
