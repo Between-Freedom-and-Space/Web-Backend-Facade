@@ -2,12 +2,12 @@
 
 import fetch from "node-fetch";
 import {AUTH_TOKEN_HEADER_NAME} from "../common/headers/headers-names.js";
+import {createGetBasePath} from "../common/helpers/api-helper.js";
 
-const url = process.env.MONO_BACKEND_URL
-const basePath = url + "/post"
+const getBasePath = createGetBasePath("/post")
 
 const createPost = async (params) => {
-    const path = basePath + "/create"
+    const path = getBasePath() + "/create"
     const { token, body } = params
     return fetch(path, {
         method: "PATCH",
@@ -19,7 +19,7 @@ const createPost = async (params) => {
 }
 
 const getAllPosts = async (params) => {
-    const path = basePath + "/all"
+    const path = getBasePath() + "/all"
     const { token, body } = params
     return fetch(path, {
         method: "GET",
@@ -31,7 +31,7 @@ const getAllPosts = async (params) => {
 }
 
 const getPostById = async (id, params) => {
-    const path = basePath + `/${id}`
+    const path = getBasePath() + `/${id}`
     const { token } = params
     return fetch(path, {
         method: "GET",
@@ -42,7 +42,7 @@ const getPostById = async (id, params) => {
 }
 
 const getPostComments = async (id, params) => {
-    const path = basePath + `/${id}/comments`
+    const path = getBasePath() + `/${id}/comments`
     const { token, body } = params
     return fetch(path, {
         method: "GET",
@@ -54,7 +54,7 @@ const getPostComments = async (id, params) => {
 }
 
 const getPostReactions = async (id, params) => {
-    const path = basePath + `/${id}/reactions`
+    const path = getBasePath() + `/${id}/reactions`
     const { token, body } = params
     return fetch(path, {
         method: "GET",
@@ -66,7 +66,7 @@ const getPostReactions = async (id, params) => {
 }
 
 const getPostCommentsCount = async (id, params) => {
-    const path = basePath + `/${id}/comments/count`
+    const path = getBasePath() + `/${id}/comments/count`
     const { token } = params
     return fetch(path, {
         method: "GET",
@@ -77,7 +77,7 @@ const getPostCommentsCount = async (id, params) => {
 }
 
 const getPostReactionsCount = async (id, params) => {
-    const path = basePath + `/${id}/reactions/count`
+    const path = getBasePath() + `/${id}/reactions/count`
     const { token } = params
     return fetch(path, {
         method: "GET",
@@ -88,7 +88,7 @@ const getPostReactionsCount = async (id, params) => {
 }
 
 const getPostTags = async (id, params) => {
-    const path = basePath + `/${id}/tags`
+    const path = getBasePath() + `/${id}/tags`
     const { token, body } = params
     return fetch(path, {
         method: "GET",
@@ -100,7 +100,7 @@ const getPostTags = async (id, params) => {
 }
 
 const reactPost = async (id, params) => {
-    const path = basePath + `/${id}/react`
+    const path = getBasePath() + `/${id}/react`
     const { token, body} = params
     return fetch(path, {
         method: "POST",
@@ -112,7 +112,7 @@ const reactPost = async (id, params) => {
 }
 
 const commentPost = async (id, params) => {
-    const path = basePath + `/${id}/comment`
+    const path = getBasePath() + `/${id}/comment`
     const { token, body } = params
     return fetch(path, {
         method: "POST",
@@ -124,7 +124,7 @@ const commentPost = async (id, params) => {
 }
 
 const updatePost = async (id, params) => {
-    const path = basePath + `/${id}/update`
+    const path = getBasePath() + `/${id}/update`
     const { token, body } = params
     return fetch(path, {
         method: "PUT",
@@ -136,7 +136,7 @@ const updatePost = async (id, params) => {
 }
 
 const deletePost = async (id, params) => {
-    const path = basePath + `/${id}/delete`
+    const path = getBasePath() + `/${id}/delete`
     const { token } = params
     return fetch(path, {
         method: "DELETE",

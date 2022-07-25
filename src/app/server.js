@@ -13,9 +13,9 @@ import profileSubscribersRouter from "../pages/profile-subscribers/profile-subsc
 import profileSubscriptionsRouter from "../pages/profile-subscriptions/profile-subscriptions-routings.js";
 import searchRouter from "../pages/search/search-routings.js"
 
-const app = express()
-
 dotenv.config()
+
+const app = express()
 
 const port = process.env.PORT
 
@@ -34,6 +34,7 @@ const serverRoutes = [
     searchRouter
 ]
 
+app.use(express.json())
 app.use(serverRoutes)
 
 const server = app.listen(port,() => {

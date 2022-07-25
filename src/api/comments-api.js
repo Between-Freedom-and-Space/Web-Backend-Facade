@@ -2,12 +2,12 @@
 
 import fetch from "node-fetch";
 import {AUTH_TOKEN_HEADER_NAME} from "../common/headers/headers-names.js";
+import {createGetBasePath} from "../common/helpers/api-helper.js";
 
-const url = process.env.MONO_BACKEND_URL
-const basePath = url + "/comment"
+const getBasePath = createGetBasePath( "/comment")
 
 const getAllComments = async (params) => {
-    const path = basePath + "/all"
+    const path = getBasePath() + "/all"
     const { token, body } = params
     return fetch(path, {
         method: "GET",
@@ -19,7 +19,7 @@ const getAllComments = async (params) => {
 }
 
 const getCommentById = async (id, params) => {
-    const path = basePath + `/${id}`
+    const path = getBasePath() + `/${id}`
     const { token } = params
     return fetch(path, {
         method: "GET",
@@ -30,7 +30,7 @@ const getCommentById = async (id, params) => {
 }
 
 const createComment = async (params) => {
-    const path = basePath + "/create"
+    const path = getBasePath() + "/create"
     const { token, body } = params
     return fetch(path, {
         method: "PATCH",
@@ -42,7 +42,7 @@ const createComment = async (params) => {
 }
 
 const updateComment = async (id, params) => {
-    const path = basePath + `/${id}/update`
+    const path = getBasePath() + `/${id}/update`
     const { token, body } = params
     return fetch(path, {
         method: "PUT",
@@ -54,7 +54,7 @@ const updateComment = async (id, params) => {
 }
 
 const deleteComment = async (id, params) => {
-    const path = basePath + `/${id}/delete`
+    const path = getBasePath() + `/${id}/delete`
     const { token } = params
     return fetch(path, {
         method: "DELETE",

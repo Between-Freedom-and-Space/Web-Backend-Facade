@@ -2,12 +2,12 @@
 
 import fetch from "node-fetch";
 import {AUTH_TOKEN_HEADER_NAME} from "../common/headers/headers-names.js";
+import {createGetBasePath} from "../common/helpers/api-helper.js";
 
-const url = process.env.MONO_BACKEND_URL
-const basePath = url + "/profile"
+const getBasePath = createGetBasePath("/profile")
 
 const getAllProfiles = async (params) => {
-    const path = basePath + "/all"
+    const path = getBasePath() + "/all"
     const { token, body } = params
     return fetch(path, {
         method: "GET",
@@ -19,7 +19,7 @@ const getAllProfiles = async (params) => {
 }
 
 const checkProfileExists = async (params) => {
-    const path = basePath + "/exists"
+    const path = getBasePath() + "/exists"
     const { body } = params
     return fetch(path, {
         method: "POST",
@@ -28,7 +28,7 @@ const checkProfileExists = async (params) => {
 }
 
 const subscribeToProfile = async (nickname, params) => {
-    const path = basePath + `/subscribe/${nickname}`
+    const path = getBasePath() + `/subscribe/${nickname}`
     const { token } = params
     return fetch(path, {
         method: "POST",
@@ -39,7 +39,7 @@ const subscribeToProfile = async (nickname, params) => {
 }
 
 const unsubscribeFromProfile = async (nickname, params) => {
-    const path = basePath + `/unsubscribe/${nickname}`
+    const path = getBasePath() + `/unsubscribe/${nickname}`
     const { token } = params
     return fetch(path, {
         method: "POST",
@@ -50,7 +50,7 @@ const unsubscribeFromProfile = async (nickname, params) => {
 }
 
 const getProfileByNickname = async (nickname, params) => {
-    const path = basePath + `/${nickname}`
+    const path = getBasePath() + `/${nickname}`
     const { token } = params
     return fetch(path, {
         method: "GET",
@@ -61,7 +61,7 @@ const getProfileByNickname = async (nickname, params) => {
 }
 
 const getProfileSubscriptions = async (nickname, params) => {
-    const path = basePath + `/${nickname}/subscriptions`
+    const path = getBasePath() + `/${nickname}/subscriptions`
     const { token } = params
     return fetch(path, {
         method: "GET",
@@ -72,7 +72,7 @@ const getProfileSubscriptions = async (nickname, params) => {
 }
 
 const getProfileSubscribers = async (nickname, params) => {
-    const path = basePath + `/${nickname}/subscribers`
+    const path = getBasePath() + `/${nickname}/subscribers`
     const { token } = params
     return fetch(path, {
         method: "GET",
@@ -83,7 +83,7 @@ const getProfileSubscribers = async (nickname, params) => {
 }
 
 const getProfileSubscriptionsCount = async (nickname, params) => {
-    const path = basePath + `/${nickname}/subscriptions/count`
+    const path = getBasePath() + `/${nickname}/subscriptions/count`
     const { token } = params
     return fetch(path, {
         method: "GET",
@@ -94,7 +94,7 @@ const getProfileSubscriptionsCount = async (nickname, params) => {
 }
 
 const getProfileSubscribersCount = async (nickname, params) => {
-    const path = basePath + `/${nickname}/subscribers/count`
+    const path = getBasePath() + `/${nickname}/subscribers/count`
     const { token } = params
     return fetch(path, {
         method: "GET",
@@ -105,7 +105,7 @@ const getProfileSubscribersCount = async (nickname, params) => {
 }
 
 const getProfilePosts = async (nickname, params) => {
-    const path = basePath + `/${nickname}/posts`
+    const path = getBasePath() + `/${nickname}/posts`
     const { token, body } = params
     return fetch(path, {
         method: "GET",
@@ -117,7 +117,7 @@ const getProfilePosts = async (nickname, params) => {
 }
 
 const getProfileComments = async (nickname, params) => {
-    const path = basePath + `/${nickname}/comments`
+    const path = getBasePath() + `/${nickname}/comments`
     const { token, body } = params
     return fetch(path, {
         method: "GET",
@@ -129,7 +129,7 @@ const getProfileComments = async (nickname, params) => {
 }
 
 const getProfileTags = async (nickname, params) => {
-    const path = basePath + `/${nickname}/tags`
+    const path = getBasePath() + `/${nickname}/tags`
     const { token, body } = params
     return fetch(path, {
         method: "GET",
@@ -141,7 +141,7 @@ const getProfileTags = async (nickname, params) => {
 }
 
 const getProfilePostReactions = async (nickname, params) => {
-    const path = basePath + `/${nickname}/post/reactions`
+    const path = getBasePath() + `/${nickname}/post/reactions`
     const { token, body } = params
     return fetch(path, {
         method: "GET",
@@ -153,7 +153,7 @@ const getProfilePostReactions = async (nickname, params) => {
 }
 
 const getProfileCommentReactions = async (nickname, params) => {
-    const path = basePath + `/${nickname}/comment/reactions`
+    const path = getBasePath() + `/${nickname}/comment/reactions`
     const { token, body } = params
     return fetch(path, {
         method: "GET",
@@ -165,7 +165,7 @@ const getProfileCommentReactions = async (nickname, params) => {
 }
 
 const createProfile = async (params) => {
-    const path = basePath + "/create"
+    const path = getBasePath() + "/create"
     const { token, body } = params
     return fetch(path, {
         method: "PATCH",
@@ -177,7 +177,7 @@ const createProfile = async (params) => {
 }
 
 const updateProfile = async (nickname, params) => {
-    const path = basePath + `/${nickname}/update`
+    const path = getBasePath() + `/${nickname}/update`
     const { token, body } = params
     return fetch(path, {
         method: "PUT",
@@ -189,7 +189,7 @@ const updateProfile = async (nickname, params) => {
 }
 
 const deleteProfile = async (nickname, params) => {
-    const path = basePath + `/${nickname}/delete`
+    const path = getBasePath() + `/${nickname}/delete`
     const { token } = params
     return fetch(path, {
         method: "DELETE",

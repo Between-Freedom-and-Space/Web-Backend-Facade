@@ -1,11 +1,11 @@
 import fetch from "node-fetch";
 import {AUTH_TOKEN_HEADER_NAME} from "../common/headers/headers-names.js";
+import {createGetBasePath} from "../common/helpers/api-helper.js";
 
-const url = process.env.MONO_BACKEND_URL
-const basePath = url + "/auth"
+const getBasePath = createGetBasePath("/auth")
 
 const registerUser = async (params) => {
-    const path = basePath + "/user/register"
+    const path = getBasePath() + "/user/register"
     const { body } = params
     return fetch(path, {
         method: "POST",
@@ -14,7 +14,8 @@ const registerUser = async (params) => {
 }
 
 const authenticateUser = async (params) => {
-    const path = basePath + "/user/authenticate"
+    const path = getBasePath() + "/user/authenticate"
+    console.log(path)
     const { body } = params
     return fetch(path, {
         method: "POST",
@@ -23,7 +24,7 @@ const authenticateUser = async (params) => {
 }
 
 const deleteUser = async (params) => {
-    const path = basePath + "/user/delete"
+    const path = getBasePath() + "/user/delete"
     const { token } = params
     return fetch(path, {
         method: "DELETE",
@@ -34,7 +35,7 @@ const deleteUser = async (params) => {
 }
 
 const verifyAccessToken = async (params) => {
-    const path = basePath + "/token/verifyAccess"
+    const path = getBasePath() + "/token/verifyAccess"
     const { token } = params
     return fetch(path, {
         method: "POST",
@@ -45,7 +46,7 @@ const verifyAccessToken = async (params) => {
 }
 
 const verifyRefreshToken = async (params) => {
-    const path = basePath + "/token/verifyRefresh"
+    const path = getBasePath() + "/token/verifyRefresh"
     const { token } = params
     return fetch(path, {
         method: "POST",
@@ -56,7 +57,7 @@ const verifyRefreshToken = async (params) => {
 }
 
 const refreshAccessToken = async (params) => {
-    const path = basePath + "/token/refreshAccess"
+    const path = getBasePath() + "/token/refreshAccess"
     const { token } = params
     return fetch(path, {
         method: "POST",
