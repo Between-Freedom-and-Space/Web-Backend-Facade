@@ -5,6 +5,8 @@
   "main": "src/app/server.js",
   "type": "module",
   "scripts": {
+    "build": "echo 'Something building'",
+    "lint": "echo 'Something linting'",
     "dev": "nodemon --experimental-json-modules src/app/server.js",
     "prod": "node --experimental-json-modules src/app/server.js",
     "clear": "sh clear.sh",
