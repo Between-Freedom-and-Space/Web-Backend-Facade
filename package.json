@@ -5,7 +5,7 @@
   "main": "src/app/server.js",
   "type": "module",
   "scripts": {
-    "build": "gulp build",
+    "build": "npm i && gulp build",
     "lint": "eslint ./src",
     "dev": "nodemon --experimental-json-modules src/app/server.js",
     "prod": "node --experimental-json-modules src/app/server.js",
