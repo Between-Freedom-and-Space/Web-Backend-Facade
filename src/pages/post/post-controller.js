@@ -1,4 +1,4 @@
-import {postsApiEndpoints} from "../../api/posts-api";
+import {postsApiEndpoints} from "../../api/posts-api.js";
 import MultipleFetch from "multiple-fetch";
 
 class PostController {

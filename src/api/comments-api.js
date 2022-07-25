@@ -1,7 +1,7 @@
 // noinspection DuplicatedCode
 
 import fetch from "node-fetch";
-import {AUTH_TOKEN_HEADER_NAME} from "../common/headers/headers-names";
+import {AUTH_TOKEN_HEADER_NAME} from "../common/headers/headers-names.js";
 
 const url = process.env.MONO_BACKEND_URL
 const basePath = url + "/comment"

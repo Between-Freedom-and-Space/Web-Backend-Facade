@@ -1,5 +1,5 @@
 import express from "express";
-import PostCreateController from "./post-create-controller";
+import PostCreateController from "./post-create-controller.js";
 
 const router = express.Router()
 const controller = new PostCreateController()
