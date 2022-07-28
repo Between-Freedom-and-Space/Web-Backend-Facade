@@ -29,6 +29,8 @@ router.post("/post/:postId/react", async (req, res) => {
 router.post("/post/:postId/remove/react", async (req, res) => {
     const postId = req.params["postId"]
     const token = req.header(AUTH_TOKEN_HEADER_NAME)
+
+    const result = await controller.reactPost()
 })
 
 router.post("/post/:postId/comment", async (req, res) => {

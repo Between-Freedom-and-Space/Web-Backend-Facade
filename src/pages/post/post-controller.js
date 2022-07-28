@@ -68,6 +68,10 @@ class PostController {
             return response.body
         })
     }
+
+    async removeReactPost(postId, token) {
+
+    }
 }
 
 export default PostController;

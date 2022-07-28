@@ -1,6 +1,8 @@
 import {authApiEndpoints} from "../../api/auth-api.js";
 import {profilesApiEndpoints} from "../../api/profiles-api.js";
 import MultipleFetch from "multiple-fetch";
+import {parseResponse} from "../../api/parsers/api-result-parser";
+import {response} from "express";
 
 class RegistrationController {
 
@@ -16,6 +18,9 @@ class RegistrationController {
         const result = await multipleFetch
             .run(() => existsFetch(existsRequestBody))
             .synchronize()
+        return parseResponse(result, (response) => {
+            return response.body
+        })
     }
 
     async sendEmailVerificationCode(email) {
@@ -28,6 +33,9 @@ class RegistrationController {
         const result = await multipleFetch
             .run(() => sendFetch(verificationRequestBody))
             .synchronize()
+        return parseResponse(result, (response) => {
+            return response.body
+        })
     }
 
     async sendPhoneVerificationCode(phoneNumber) {
@@ -40,6 +48,9 @@ class RegistrationController {
         const result = await multipleFetch
             .run(() => sendFetch(verificationRequestBody))
             .synchronize()
+        return parseResponse(result, (response) => {
+            return response.body
+        })
     }
 
     async validateEmailVerificationCode(email, code) {
@@ -53,6 +64,9 @@ class RegistrationController {
         const result = await multipleFetch
             .run(() => validateFetch(validateRequestBody))
             .synchronize()
+        return parseResponse(result, (response) => {
+            return response.body
+        })
     }
 
     async validatePhoneVerificationCode(phone, code) {
@@ -66,6 +80,9 @@ class RegistrationController {
         const result = await multipleFetch
             .run(() => validateFetch(validateRequestBody))
             .synchronize()
+        return parseResponse(result, (response) => {
+            return response.body
+        })
     }
 
     async registerNewUserProfile(inputData) {
@@ -75,6 +92,9 @@ class RegistrationController {
         const result = await multipleFetch
             .run(() => registerFetch(inputData))
             .synchronize()
+        return parseResponse(result, (response) => {
+            return response.body
+        })
     }
 }
 

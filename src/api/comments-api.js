@@ -29,6 +29,29 @@ const getCommentById = async (id, params) => {
     })
 }
 
+const reactComment = async (id, params) => {
+    const path = getBasePath() + `/${id}/react`
+    const {body, token} = params
+    return fetch(path, {
+        method: "POST",
+        headers: {
+            [AUTH_TOKEN_HEADER_NAME]: token
+        },
+        body: JSON.stringify(body)
+    })
+}
+
+const removeReactComment = async (id, params) => {
+    const path = getBasePath() + `/${id}/remove/react`
+    const {token} = params
+    return fetch(path, {
+        method: "POST",
+        headers: {
+            [AUTH_TOKEN_HEADER_NAME]: token
+        }
+    })
+}
+
 const createComment = async (params) => {
     const path = getBasePath() + "/create"
     const { token, body } = params
@@ -67,6 +90,8 @@ const deleteComment = async (id, params) => {
 export const commentsApiEndpoints = {
     getAllComments,
     getCommentById,
+    reactComment,
+    removeReactComment,
     createComment,
     updateComment,
     deleteComment
