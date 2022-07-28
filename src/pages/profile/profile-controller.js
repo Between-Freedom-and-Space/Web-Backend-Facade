@@ -38,10 +38,10 @@ class ProfileController {
             getProfileSubscriptionsCountResult, getProfilePostsResult
         ], (responses) => {
             return collectResults([
-                {alias: 'profile', answer: responses[0]},
-                {alias: 'profile_subscribers_count', answer: responses[1]},
-                {alias: 'profile_subscriptions_count', answer: responses[2]},
-                {alias: 'profile_posts', answer: responses[3]}
+                {alias: 'profile', answer: responses[0].body},
+                {alias: 'profile_subscribers_count', answer: responses[1].body},
+                {alias: 'profile_subscriptions_count', answer: responses[2].body},
+                {alias: 'profile_posts', answer: responses[3].body}
             ])
         })
     }

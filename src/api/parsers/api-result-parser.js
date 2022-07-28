@@ -1,5 +1,3 @@
-import {response} from "express";
-
 export function parseResponse(response, successAction) {
     if (response.status === 200) {
         return {

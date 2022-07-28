@@ -166,6 +166,18 @@ const getProfileCommentReactions = async (nickname, params) => {
     })
 }
 
+const getProfileLastSubscriptionsPosts = async (params) => {
+    const path = getBasePath() + `/${nickname}/subscriptions/posts`
+    const { token, body } = params
+    return fetch(path, {
+        method: "GET",
+        headers: {
+            [AUTH_TOKEN_HEADER_NAME]: token
+        },
+        body: JSON.stringify(body)
+    })
+}
+
 const createProfile = async (params) => {
     const path = getBasePath() + "/create"
     const { token, body } = params
@@ -216,6 +228,7 @@ export const profilesApiEndpoints = {
     getProfileTags,
     getProfilePostReactions,
     getProfileCommentReactions,
+    getProfileLastSubscriptionsPosts,
     createProfile,
     updateProfile,
     deleteProfile

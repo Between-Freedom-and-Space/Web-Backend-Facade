@@ -6,7 +6,7 @@ class CommentController {
 
     }
 
-    removeReactComment(commentId, react, token) {
+    removeReactComment(commentId, token) {
 
     }
 }

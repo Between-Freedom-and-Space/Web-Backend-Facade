@@ -22,12 +22,16 @@ export function fetch(path, init) {
         })
         .catch(exception => {
             console.warn(exception)
-            return {
+            const body =  {
                 ...internalServerError,
                 error: {
                     ...(internalServerError.error || {}),
                     message: exception.message
                 }
+            }
+            return {
+                status: 500,
+                body,
             }
         })
 }
