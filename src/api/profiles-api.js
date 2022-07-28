@@ -62,23 +62,25 @@ const getProfileByNickname = async (nickname, params) => {
 
 const getProfileSubscriptions = async (nickname, params) => {
     const path = getBasePath() + `/${nickname}/subscriptions`
-    const { token } = params
+    const { token, body } = params
     return fetch(path, {
         method: "GET",
         headers: {
             [AUTH_TOKEN_HEADER_NAME]: token
-        }
+        },
+        body: JSON.stringify(body)
     })
 }
 
 const getProfileSubscribers = async (nickname, params) => {
     const path = getBasePath() + `/${nickname}/subscribers`
-    const { token } = params
+    const { token, body } = params
     return fetch(path, {
         method: "GET",
         headers: {
             [AUTH_TOKEN_HEADER_NAME]: token
-        }
+        },
+        body: JSON.stringify(body)
     })
 }
 

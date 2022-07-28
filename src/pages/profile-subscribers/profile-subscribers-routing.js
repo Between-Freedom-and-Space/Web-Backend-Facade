@@ -9,7 +9,7 @@ router.get("/subscribers/:nickname/get", async (req, res) => {
     const nickname = req.params["nickname"]
     const token = req.header(AUTH_TOKEN_HEADER_NAME)
 
-    const result = controller.getProfileSubscribers(nickname, token)
+    const result = await controller.getProfileSubscribers(nickname, token)
 
     res.status(result.status)
     res.send(result.answer)
