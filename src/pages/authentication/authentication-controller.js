@@ -1,5 +1,6 @@
 import {authApiEndpoints} from "../../api/auth-api.js";
 import MultipleFetch from "multiple-fetch";
+import {parseResponse} from "../../api/parsers/api-result-parser.js";
 
 class AuthenticationController {
 
@@ -9,9 +10,12 @@ class AuthenticationController {
         const refreshFetch = authApiEndpoints.refreshAccessToken
         const multiplyFetch = new MultipleFetch(this.#ENABLE_LOGS)
 
-        const result = await multiplyFetch
+        const fetchResult = await multiplyFetch
             .run(() => refreshFetch(token))
             .synchronize()
+        return parseResponse(fetchResult, async (result) => {
+            return await result.headers
+        })
     }
 
     async authenticateUser(login, password) {
@@ -23,10 +27,12 @@ class AuthenticationController {
         const authenticateFetch = authApiEndpoints.authenticateUser
         const multiplyFetch = new MultipleFetch(this.#ENABLE_LOGS)
 
-        return await multiplyFetch
+        const fetchResult = await multiplyFetch
             .run(() => authenticateFetch({body: authenticateRequestBody}))
             .synchronize()
-            .then(data => data.json())
+        return parseResponse(fetchResult, (result) => {
+            return result.body
+        })
     }
 }
 

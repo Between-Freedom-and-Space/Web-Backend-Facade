@@ -13,7 +13,13 @@ export function fetch(path, init) {
             'Content-Type': 'application/json',
         }
     })
-        .then(res => res.json())
+        .then(async res => {
+            return {
+                status: res.status,
+                headers: res.headers,
+                body: await res.json()
+            }
+        })
         .catch(exception => {
             console.warn(exception)
             return {
