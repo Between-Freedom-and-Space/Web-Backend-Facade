@@ -13,13 +13,53 @@ Performs only the function of combining several responses into one.
 * Simplicity
 * CI/CD
 
+## Structure:
+The project consists of two main modules and util packages.
+
+### First module is [api](/src/api):
+Contains all endpoints to Mono-Backend. 
+
+Usually you need token and body from frontend.
+### Second module is [pages](/src/pages):
+Contains all routings for Facade and controllers for each page.
+
+Usually controllers implements aggregate logic of Mono-Backend endpoints.
+
+### Visualisation:
+```shell
+├── api (All endpoints to Mono-Backend)
+│   ├── auth-api.js
+│   ├── comment-reactions-api.js
+│   ├── comments-api.js
+│   ├── popular-api.js
+│   ├── post-reactions-api.js
+│   ├── posts-api.js
+│   ├── profiles-api.js
+│   └── tags-api.js
+├── app (Facade application)
+├── assets (Static assets)
+├── common (Helpers and custom libraries)
+└── pages (Page routings and controllers)
+    ├── about-service
+    ├── authentication
+    ├── comment
+    ├── home
+    ├── post
+    ├── post-create
+    ├── profile
+    ├── profile-settings
+    ├── profile-subscribers
+    ├── profile-subscriptions
+    ├── registration
+    └── search
+
+```
+
 ## How to launch:
 * Create `.env` file in the root project/
 * As default way you can use `npm run env`
 * Make setup with `npm install`
 * Make up server with `npm run dev`
-
-## Structure:
 
 ## Git Flow:
 For our developers and managers we use [YouTrack](https://www.jetbrains.com/youtrack/) as project management tool.
