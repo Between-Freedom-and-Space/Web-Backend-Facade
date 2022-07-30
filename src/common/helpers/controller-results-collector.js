@@ -1,14 +1,10 @@
 export function collectResults(resultModels) {
-    const result = []
-
-    resultModels.forEach((resultModel) => {
+    return resultModels.map((resultModel) => {
         const resultAlias = resultModel.alias
         const resultAnswer = resultModel.answer
-        result.push({
+        return {
             alias: resultAlias,
             answer: resultAnswer
-        })
+        }
     })
-
-    return result
 }

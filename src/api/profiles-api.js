@@ -231,5 +231,5 @@ export const profilesApiEndpoints = {
     getProfileLastSubscriptionsPosts,
     createProfile,
     updateProfile,
-    deleteProfile
+    deleteProfile,
 }

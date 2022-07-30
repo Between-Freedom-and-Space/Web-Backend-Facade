@@ -94,5 +94,5 @@ export const commentsApiEndpoints = {
     removeReactComment,
     createComment,
     updateComment,
-    deleteComment
+    deleteComment,
 }

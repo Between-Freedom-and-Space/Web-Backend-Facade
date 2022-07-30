@@ -92,5 +92,5 @@ export const authApiEndpoints = {
     sendEmailVerificationCode,
     sendPhoneVerificationCode,
     verifyPhoneVerificationCode,
-    verifyEmailVerificationCode
+    verifyEmailVerificationCode,
 }

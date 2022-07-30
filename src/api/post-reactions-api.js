@@ -69,5 +69,5 @@ export const postReactionsApiEndpoints = {
     getPostReactionById,
     createPostReaction,
     updatePostReaction,
-    deletePostReaction
+    deletePostReaction,
 }

@@ -70,5 +70,5 @@ export const commentReactionsApiEndpoints = {
     getCommentReactionById,
     createCommentReaction,
     updateCommentReaction,
-    deleteCommentReaction
+    deleteCommentReaction,
 }

@@ -31,7 +31,7 @@ const serverRoutes = [
     profileSettingsRouter,
     profileSubscribersRouter,
     profileSubscriptionsRouter,
-    searchRouter
+    searchRouter,
 ]
 
 app.use(express.json())

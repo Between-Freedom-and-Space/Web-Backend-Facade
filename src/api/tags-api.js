@@ -104,5 +104,5 @@ export const tagsApiEndpoints = {
     updateTagById,
     updateTagByAlias,
     deleteTagById,
-    deleteTagByAlias
+    deleteTagByAlias,
 }

@@ -158,5 +158,5 @@ export const postsApiEndpoints = {
     reactPost,
     commentPost,
     updatePost,
-    deletePost
+    deletePost,
 }
