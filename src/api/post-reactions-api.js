@@ -1,13 +1,13 @@
 // noinspection DuplicatedCode
 
-import fetch from "node-fetch";
-import {AUTH_TOKEN_HEADER_NAME} from "../common/headers/headers-names";
+import {fetch} from "../common/helpers/api-helpers.js";
+import {AUTH_TOKEN_HEADER_NAME} from "../common/headers/headers-names.js";
+import {createGetBasePath} from "../common/helpers/api-helpers.js";
 
-const url = process.env.MONO_BACKEND_URL
-const basePath = url + "/reaction/post"
+const getBasePath = createGetBasePath("/reaction/post")
 
 const getAllPostReactions = async (params) => {
-    const path = basePath + "/all"
+    const path = getBasePath() + "/all"
     const { token, body } = params
     return fetch(path, {
         method: "GET",
@@ -19,7 +19,7 @@ const getAllPostReactions = async (params) => {
 }
 
 const getPostReactionById = async (id, params) => {
-    const path = basePath + `/${id}`
+    const path = getBasePath() + `/${id}`
     const { token } = params
     return fetch(path, {
         method: "GET",
@@ -30,7 +30,7 @@ const getPostReactionById = async (id, params) => {
 }
 
 const createPostReaction = async (params) => {
-    const path = basePath + "/create"
+    const path = getBasePath() + "/create"
     const { token, body } = params
     return fetch(path, {
         method: "PATCH",
@@ -42,7 +42,7 @@ const createPostReaction = async (params) => {
 }
 
 const updatePostReaction = async (id, params) => {
-    const path = basePath + `/${id}/update`
+    const path = getBasePath() + `/${id}/update`
     const { token, body } = params
     return fetch(path, {
         method: "PUT",
@@ -54,7 +54,7 @@ const updatePostReaction = async (id, params) => {
 }
 
 const deletePostReaction = async (id, params) => {
-    const path = basePath + `/${id}/delete`
+    const path = getBasePath() + `/${id}/delete`
     const { token } = params
     return fetch(path, {
         method: "DELETE",
@@ -69,5 +69,5 @@ export const postReactionsApiEndpoints = {
     getPostReactionById,
     createPostReaction,
     updatePostReaction,
-    deletePostReaction
+    deletePostReaction,
 }

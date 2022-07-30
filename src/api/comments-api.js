@@ -1,13 +1,13 @@
 // noinspection DuplicatedCode
 
-import fetch from "node-fetch";
-import {AUTH_TOKEN_HEADER_NAME} from "../common/headers/headers-names";
+import {fetch} from "../common/helpers/api-helpers.js";
+import {AUTH_TOKEN_HEADER_NAME} from "../common/headers/headers-names.js";
+import {createGetBasePath} from "../common/helpers/api-helpers.js";
 
-const url = process.env.MONO_BACKEND_URL
-const basePath = url + "/comment"
+const getBasePath = createGetBasePath( "/comment")
 
 const getAllComments = async (params) => {
-    const path = basePath + "/all"
+    const path = getBasePath() + "/all"
     const { token, body } = params
     return fetch(path, {
         method: "GET",
@@ -19,7 +19,7 @@ const getAllComments = async (params) => {
 }
 
 const getCommentById = async (id, params) => {
-    const path = basePath + `/${id}`
+    const path = getBasePath() + `/${id}`
     const { token } = params
     return fetch(path, {
         method: "GET",
@@ -29,8 +29,31 @@ const getCommentById = async (id, params) => {
     })
 }
 
+const reactComment = async (id, params) => {
+    const path = getBasePath() + `/${id}/react`
+    const {body, token} = params
+    return fetch(path, {
+        method: "POST",
+        headers: {
+            [AUTH_TOKEN_HEADER_NAME]: token
+        },
+        body: JSON.stringify(body)
+    })
+}
+
+const removeReactComment = async (id, params) => {
+    const path = getBasePath() + `/${id}/remove/react`
+    const {token} = params
+    return fetch(path, {
+        method: "POST",
+        headers: {
+            [AUTH_TOKEN_HEADER_NAME]: token
+        }
+    })
+}
+
 const createComment = async (params) => {
-    const path = basePath + "/create"
+    const path = getBasePath() + "/create"
     const { token, body } = params
     return fetch(path, {
         method: "PATCH",
@@ -42,7 +65,7 @@ const createComment = async (params) => {
 }
 
 const updateComment = async (id, params) => {
-    const path = basePath + `/${id}/update`
+    const path = getBasePath() + `/${id}/update`
     const { token, body } = params
     return fetch(path, {
         method: "PUT",
@@ -54,7 +77,7 @@ const updateComment = async (id, params) => {
 }
 
 const deleteComment = async (id, params) => {
-    const path = basePath + `/${id}/delete`
+    const path = getBasePath() + `/${id}/delete`
     const { token } = params
     return fetch(path, {
         method: "DELETE",
@@ -67,7 +90,9 @@ const deleteComment = async (id, params) => {
 export const commentsApiEndpoints = {
     getAllComments,
     getCommentById,
+    reactComment,
+    removeReactComment,
     createComment,
     updateComment,
-    deleteComment
+    deleteComment,
 }

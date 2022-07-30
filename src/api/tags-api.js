@@ -1,11 +1,11 @@
-import fetch from "node-fetch";
-import {AUTH_TOKEN_HEADER_NAME} from "../common/headers/headers-names";
+import {fetch} from "../common/helpers/api-helpers.js";
+import {AUTH_TOKEN_HEADER_NAME} from "../common/headers/headers-names.js";
+import {createGetBasePath} from "../common/helpers/api-helpers.js";
 
-const url = process.env.MONO_BACKEND_URL
-const basePath = url + "/tag"
+const getBasePath = createGetBasePath("/tag")
 
 const getAllTags = async (params) => {
-    const path = basePath + "/all"
+    const path = getBasePath() + "/all"
     const { token, body } = params
     return fetch(path, {
         method: "GET",
@@ -17,7 +17,7 @@ const getAllTags = async (params) => {
 }
 
 const getTagById = async (id, params) => {
-    const path = basePath + `/byId/${id}`
+    const path = getBasePath() + `/byId/${id}`
     const { token } = params
     return fetch(path, {
         method: "GET",
@@ -28,7 +28,7 @@ const getTagById = async (id, params) => {
 }
 
 const getTagByAlias = async (alias, params) => {
-    const path = basePath + `/byAlias/${alias}`
+    const path = getBasePath() + `/byAlias/${alias}`
     const { token } = params
     return fetch(path, {
         method: "GET",
@@ -39,7 +39,7 @@ const getTagByAlias = async (alias, params) => {
 }
 
 const createTag = async (params) => {
-    const path = basePath + "/create"
+    const path = getBasePath() + "/create"
     const { token, body } = params
     return fetch(path, {
         method: "PATCH",
@@ -51,7 +51,7 @@ const createTag = async (params) => {
 }
 
 const updateTagById = async (id, params) => {
-    const path = basePath + `/byId/${id}/update`
+    const path = getBasePath() + `/byId/${id}/update`
     const { token, body } = params
     return fetch(path, {
         method: "PUT",
@@ -63,7 +63,7 @@ const updateTagById = async (id, params) => {
 }
 
 const updateTagByAlias = async (alias, params) => {
-    const path = basePath + `/byAlias/${alias}/update`
+    const path = getBasePath() + `/byAlias/${alias}/update`
     const { token, body } = params
     return fetch(path, {
         method: "PUT",
@@ -75,7 +75,7 @@ const updateTagByAlias = async (alias, params) => {
 }
 
 const deleteTagById = async (id, params) => {
-    const path = basePath + `/byId/${id}/delete`
+    const path = getBasePath() + `/byId/${id}/delete`
     const { token } = params
     return fetch(path, {
         method: "DELETE",
@@ -86,7 +86,7 @@ const deleteTagById = async (id, params) => {
 }
 
 const deleteTagByAlias = async (alias, params) => {
-    const path = basePath + `/byAlias/${alias}/delete`
+    const path = getBasePath() + `/byAlias/${alias}/delete`
     const { token } = params
     return fetch(path, {
         method: "DELETE",
@@ -104,5 +104,5 @@ export const tagsApiEndpoints = {
     updateTagById,
     updateTagByAlias,
     deleteTagById,
-    deleteTagByAlias
+    deleteTagByAlias,
 }

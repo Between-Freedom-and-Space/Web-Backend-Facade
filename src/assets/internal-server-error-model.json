@@ -1,0 +1,8 @@
+{
+  "status_code": 500,
+  "status_message": "Internal Server Error",
+  "error": {
+    "error_id": -113,
+    "message": "Something went wrong"
+  }
+}

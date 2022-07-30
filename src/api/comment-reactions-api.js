@@ -1,13 +1,13 @@
 // noinspection DuplicatedCode
 
-import fetch from "node-fetch";
-import {AUTH_TOKEN_HEADER_NAME} from "../common/headers/headers-names";
+import {fetch} from "../common/helpers/api-helpers.js";
+import {AUTH_TOKEN_HEADER_NAME} from "../common/headers/headers-names.js";
+import {createGetBasePath} from "../common/helpers/api-helpers.js";
 
-const url = process.env.MONO_BACKEND_URL
-const basePath = url + "/reaction/comment"
+const getBasePath = createGetBasePath("/reaction/comment")
 
 const getAllCommentsReactions = async (params) => {
-    const path = basePath + "/all"
+    const path = getBasePath() + "/all"
     const { token, body } = params
     return fetch(path, {
         method: "GET",
@@ -19,7 +19,7 @@ const getAllCommentsReactions = async (params) => {
 }
 
 const getCommentReactionById = async (id, params) => {
-    const path = basePath + `/${id}`
+    const path = getBasePath() + `/${id}`
     const { token } = params
     return fetch(path, {
         method: "GET",
@@ -30,7 +30,7 @@ const getCommentReactionById = async (id, params) => {
 }
 
 const createCommentReaction = async (params) => {
-    const path = basePath + "/create"
+    const path = getBasePath() + "/create"
     const { token, body } = params
     return fetch(path, {
         method: "PATCH",
@@ -42,7 +42,7 @@ const createCommentReaction = async (params) => {
 }
 
 const updateCommentReaction = async (id, params) => {
-    const path = basePath + `/${id}/update`
+    const path = getBasePath() + `/${id}/update`
     const { token, body } = params
     return fetch(path, {
         method: "PUT",
@@ -54,7 +54,7 @@ const updateCommentReaction = async (id, params) => {
 }
 
 const deleteCommentReaction = async (id, params) => {
-    const path = basePath + `/${id}/delete`
+    const path = getBasePath() + `/${id}/delete`
     const { token, body } = params
     return fetch(path, {
         method: "DELETE",
@@ -70,5 +70,5 @@ export const commentReactionsApiEndpoints = {
     getCommentReactionById,
     createCommentReaction,
     updateCommentReaction,
-    deleteCommentReaction
+    deleteCommentReaction,
 }

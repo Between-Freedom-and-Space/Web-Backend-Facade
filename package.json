@@ -5,11 +5,20 @@
   "main": "src/app/server.js",
   "type": "module",
   "scripts": {
+    "build": "npm i && gulp build",
+    "lint": "eslint ./src",
     "dev": "nodemon --experimental-json-modules src/app/server.js",
     "prod": "node --experimental-json-modules src/app/server.js",
     "clear": "sh clear.sh",
     "env": "cp .env.example .env",
     "test": "jest --config jest.config.cjs --passWithNoTests"
+  },
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "diagnostics": false
+      }
+    }
   },
   "repository": {
     "type": "git",
@@ -19,7 +28,8 @@
   "contributors": [
     {
       "name": "Matvey Popov",
-      "url": "https://github.com/Ferum-bot"
+      "url": "https://github.com/Ferum-bot",
+      "email": "ghfdhuf85429532@gmail.com"
     },
     {
       "name": "Stanislav Klokov",
@@ -36,13 +46,15 @@
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "gulp": "^4.0.2",
     "multer": "^1.4.5-lts.1",
-    "node-fetch": "^3.2.5",
-    "multiple-fetch": "file:src/common/packages/multiple-fetch/"
+    "multiple-fetch": "file:src/common/packages/multiple-fetch/",
+    "node-fetch": "^3.2.5"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.18.2",
     "babel-jest": "^28.1.0",
+    "eslint": "^8.20.0",
     "jest": "^26.6.3",
     "nodemon": "^2.0.16"
   }
