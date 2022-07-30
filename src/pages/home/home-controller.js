@@ -14,6 +14,12 @@ class HomeController {
             : this.#getGenericHomePage()
     }
 
+    /**
+     * Collect data for target user.
+     * @param token user token.
+     * @see MultipleFetch
+     * @returns {Promise<{answer: *, status: number}|{answer: *, status: *}>}
+     */
     async #getPersonalHomePage(token) {
         const pageParamsRequestBody = {
             page_number: 1,
@@ -52,6 +58,11 @@ class HomeController {
         })
     }
 
+    /**
+     * Collect generic data for home preview.
+     * @see MultipleFetch
+     * @returns {Promise<{answer: *, status: number}|{answer: *, status: *}>}
+     */
     async #getGenericHomePage() {
         const pageParamsRequestBody = {
             page_number: 1,

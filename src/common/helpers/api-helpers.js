@@ -1,6 +1,7 @@
 import nodeFetch from "node-fetch";
-import internalServerError from "../../assets/internal-server-error-model.json"
+import internalServerError from "../../assets/internal-server-error-model.json";
 
+// Getting mono backend url from env file.
 export function createGetBasePath(path) {
     return () => process.env.MONO_BACKEND_URL + path
 }

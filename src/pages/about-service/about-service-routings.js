@@ -5,7 +5,7 @@ const router = express.Router()
 const controller = new AboutServiceController()
 
 router.get("/about", (req, res) => {
-
+    // TODO(Not Implementer yet)
 })
 
 export default router

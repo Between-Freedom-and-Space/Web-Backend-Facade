@@ -1,20 +1,14 @@
 export function parseResponse(response, successAction) {
-    if (response.status === 200) {
-        return {
-            status: response.status,
-            answer: successAction(response)
-        }
-    }
     return {
         status: response.status,
-        answer: response.body
+        answer: response.status === 200 ? successAction(response) : response.body
     }
 }
 
 export function parseSeveralResponses(responses, successAction) {
-    let errorResponses = responses
+    const errorResponses = responses
         .filter(response => response.status !== 200)
-    if (errorResponses.isEmpty()) {
+    if (errorResponses.length === 0) {
         return {
             status: 200,
             answer: successAction(responses)
