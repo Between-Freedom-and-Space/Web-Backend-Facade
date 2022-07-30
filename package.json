@@ -11,17 +11,14 @@
     "prod": "node --experimental-json-modules src/app/server.js",
     "clear": "sh clear.sh",
     "env": "cp .env.example .env",
-    "test": "jest --config jest.config.cjs --passWithNoTests --transformIgnorePatterns"
+    "test": "jest --config jest.config.cjs --passWithNoTests"
   },
   "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node",
-    "transform": {
-      "node_modules/variables/.+\\.(j|t)sx?$": "ts-jest"
-    },
-    "transformIgnorePatterns": [
-      "node_modules/(?!variables/.*)"
-    ]
+    "globals": {
+      "ts-jest": {
+        "diagnostics": false
+      }
+    }
   },
   "repository": {
     "type": "git",
