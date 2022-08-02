@@ -5,7 +5,6 @@ const buildConfig = {
 }
 
 const path = require('path')
-const webpack = require('webpack')
 const nodeExternals = require('webpack-node-externals')
 
 const ROOT_PATH = path.resolve(__dirname, '..')
@@ -13,15 +12,13 @@ const PATH = path.resolve(ROOT_PATH, buildConfig.src)
 
 module.exports = (env, args) => {
     return {
-        plugins: [
-            // new webpack.IgnorePlugin('/tests/')
-        ],
         entry: {
             build: PATH
         },
         mode: "production",
         output: {
             filename: buildConfig.target,
+            publicPath: "/",
             path: path.resolve(ROOT_PATH, buildConfig.build)
         },
         resolve: {
@@ -32,7 +29,7 @@ module.exports = (env, args) => {
                 path.resolve(ROOT_PATH, 'node_modules')
             ]
         },
-        target: 'web',
+        target: 'node',
         externals: [nodeExternals()],
         node: {
             __dirname: false,

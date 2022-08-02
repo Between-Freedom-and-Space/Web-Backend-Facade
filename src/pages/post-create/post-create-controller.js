@@ -1,6 +1,6 @@
-import {postsApiEndpoints} from "../../api/posts-api";
+import {postsApiEndpoints} from "../../api/posts-api.js";
 import MultipleFetch from "multiple-fetch";
-import {parseResponse} from "../../api/parsers/api-result-parser";
+import {parseResponse} from "../../api/parsers/api-result-parser.js";
 
 class PostCreateController {
 

@@ -1,7 +1,7 @@
 import {authApiEndpoints} from "../../api/auth-api.js";
 import {profilesApiEndpoints} from "../../api/profiles-api.js";
 import MultipleFetch from "multiple-fetch";
-import {parseResponse} from "../../api/parsers/api-result-parser";
+import {parseResponse} from "../../api/parsers/api-result-parser.js";
 import {response} from "express";
 
 class RegistrationController {

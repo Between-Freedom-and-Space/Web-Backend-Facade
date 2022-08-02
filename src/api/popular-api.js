@@ -1,5 +1,5 @@
 import {createGetBasePath, fetch} from "../common/helpers/api-helpers.js";
-import {AUTH_TOKEN_HEADER_NAME} from "../common/headers/headers-names";
+import {AUTH_TOKEN_HEADER_NAME} from "../common/headers/headers-names.js";
 
 const getBasePath = createGetBasePath("/popular")
 

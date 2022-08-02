@@ -1,14 +1,7 @@
-FROM node:18-alpine as prod_image
+FROM node:18-alpine
 
-WORKDIR /opt
-COPY . .
+ARG APP_DIR=app
 
-# Описание флагов: https://docs.npmjs.com/cli/install
-# CI: https://docs.npmjs.com/cli/ci.html
-RUN npm ci --no-audit --no-optional --ignore-scripts --prefer-offline --cache .npm
-RUN npm run build
+RUN mkdir -p ${APP_DIR}
+WORKDIR ${APP_DIR}
 
-# приложение
-EXPOSE 3000
-
-CMD ["node", "build/server.js"]

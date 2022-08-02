@@ -1,7 +1,7 @@
-import {profilesApiEndpoints} from "../../api/profiles-api";
+import {profilesApiEndpoints} from "../../api/profiles-api.js";
 import MultipleFetch from "multiple-fetch";
-import {parseResponse, parseSeveralResponses} from "../../api/parsers/api-result-parser";
-import {collectResults} from "../../common/helpers/controller-results-collector";
+import {parseResponse, parseSeveralResponses} from "../../api/parsers/api-result-parser.js";
+import {collectResults} from "../../common/helpers/controller-results-collector.js";
 
 class ProfileController {
 

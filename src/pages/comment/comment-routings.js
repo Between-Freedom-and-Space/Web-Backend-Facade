@@ -1,6 +1,6 @@
 import express from "express";
 import CommentController from "./comment-controller.js";
-import {AUTH_TOKEN_HEADER_NAME} from "../../common/headers/headers-names";
+import {AUTH_TOKEN_HEADER_NAME} from "../../common/headers/headers-names.js";
 
 const router = express.Router()
 const controller = new CommentController()
