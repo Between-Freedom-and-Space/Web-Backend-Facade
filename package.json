@@ -8,7 +8,7 @@
     "build": "rm -r -f build && webpack --config configs/webpack.config.cjs",
     "lint": "eslint ./src",
     "dev": "nodemon --experimental-json-modules src/app/server.js",
-    "prod": "node --experimental-json-modules src/app/server.js",
+    "prod": "node --experimental-json-modules build/server.js",
     "clear": "sh clear.sh",
     "env": "cp .env.example .env",
     "test": "jest --config jest.config.cjs --passWithNoTests"
