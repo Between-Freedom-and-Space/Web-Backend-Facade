@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mono-backend-deployment
+  name: web-backend-facade-deployment
   labels:
-    app: web-backend-facade-deployment
+    app: web-backend-facade
     owner: Ferum-bot
     tier: backend
     stage: testing
@@ -14,10 +14,12 @@ spec:
   selector:
     matchLabels:
       app: web-backend-facade-application
+      stage: testing
   template:
     metadata:
       labels:
         app: web-backend-facade-application
+        stage: testing
     spec:
       containers:
         - name: web-backend-facade-container
