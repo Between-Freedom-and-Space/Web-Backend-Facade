@@ -19,4 +19,4 @@ RUN cp .env.example .env
 
 EXPOSE 8585:8585
 
-CMD [ "/usr/local/bin/node", "./build/server.js" ]
+CMD [ "npm", "run prod" ]
