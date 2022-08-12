@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-backend-facade-deployment
+  labels:
+    app: web-backend-facade
+    owner: Ferum-bot
+    tier: backend
+    stage: testing
+    infrastructure: js
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web-backend-facade-application
+      stage: testing
+  template:
+    metadata:
+      labels:
+        app: web-backend-facade-application
+        stage: testing
+    spec:
+      containers:
+        - name: web-backend-facade-container
+          image: cr.yandex/$REGISTRY_ID/$REPOSITORY_NAME:$IMAGE_TAG
+          ports:
+            - containerPort: 8585
+              hostPort: 8585
+          env:
+            - name: MONO_BACKEND_URL
+              value: {{MONO_BACKEND_URL}}

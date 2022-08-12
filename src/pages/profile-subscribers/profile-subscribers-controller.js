@@ -1,4 +1,4 @@
-import {profilesApiEndpoints} from "../../api/profiles-api";
+import {profilesApiEndpoints} from "../../api/profiles-api.js";
 import MultipleFetch from "multiple-fetch";
 import {parseResponse} from "../../api/parsers/api-result-parser.js";
 
