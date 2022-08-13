@@ -213,6 +213,25 @@ const deleteProfile = async (nickname, params) => {
     })
 }
 
+const getProfileIcon = async (nickname) => {
+    const path = getBasePath() + `/${nickname}/icon`
+    return fetch(path, {
+        method: "GET"
+    })
+}
+
+const setProfileIcon = async (nickname, params) => {
+    const path = getBasePath() + `/${nickname}/set/icon`
+    const { token, body } = params
+    return fetch(path, {
+        method: "POST",
+        headers: {
+            [AUTH_TOKEN_HEADER_NAME]: token
+        },
+        body: JSON.stringify(body)
+    })
+}
+
 export const profilesApiEndpoints = {
     getAllProfiles,
     checkProfileExists,
@@ -232,4 +251,6 @@ export const profilesApiEndpoints = {
     createProfile,
     updateProfile,
     deleteProfile,
+    getProfileIcon,
+    setProfileIcon
 }
