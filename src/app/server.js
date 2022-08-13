@@ -1,5 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import prometheusMiddleware from 'express-prometheus-middleware'
 import postRouter from "../pages/post/post-routings.js";
 import registrationRouter from "../pages/registration/registration-routings.js";
 import authenticationRouter from "../pages/authentication/authentication-routings.js";
@@ -36,6 +37,11 @@ const serverRoutes = [
 
 app.use(express.json())
 app.use(serverRoutes)
+
+app.use(prometheusMiddleware({
+    metricsPath: '/metrics',
+    collectDefaultMetrics: true
+}))
 
 const server = app.listen(port,() => {
     console.log(`Server started on port ${port}`);
