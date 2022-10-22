@@ -62,7 +62,7 @@ jobs:
           ENV_MONO_BACKEND_URL: ${{ secrets.MONOLITH_URL }}
         run: |
           sed -i 's|$REGISTRY_ID|crpp4a802h6om9om40b4|g' ./k8s/deployment.testing.yaml
-          sed -i 's|$REPOSITORY_NAME|mono-backend|g' ./k8s/deployment.testing.yaml
+          sed -i 's|$REPOSITORY_NAME|web-backend-facade|g' ./k8s/deployment.testing.yaml
           sed -i 's|$IMAGE_TAG|${{ github.event.inputs.release-version }}|g' ./k8s/deployment.testing.yaml
           sed -i "s|{{MONO_BACKEND_URL}}|$ENV_MONO_BACKEND_URL|g" ./k8s/deployment.testing.yaml
 
