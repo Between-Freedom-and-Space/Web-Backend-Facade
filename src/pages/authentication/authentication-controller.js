@@ -34,6 +34,10 @@ class AuthenticationController {
             return result.body
         })
     }
+
+    async deleteUser(token) {
+
+    }
 }
 
 export default AuthenticationController;
