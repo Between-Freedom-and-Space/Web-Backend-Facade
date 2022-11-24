@@ -66,22 +66,6 @@ const refreshAccessToken = async (params) => {
     })
 }
 
-const sendEmailVerificationCode = async (params) => {
-    return fetch()
-}
-
-const sendPhoneVerificationCode = async (params) => {
-    return fetch()
-}
-
-const verifyEmailVerificationCode = async (params) => {
-    return fetch()
-}
-
-const verifyPhoneVerificationCode = async (path) => {
-    return fetch()
-}
-
 export const authApiEndpoints = {
     registerUser,
     authenticateUser,
@@ -89,8 +73,4 @@ export const authApiEndpoints = {
     verifyAccessToken,
     verifyRefreshToken,
     refreshAccessToken,
-    sendEmailVerificationCode,
-    sendPhoneVerificationCode,
-    verifyPhoneVerificationCode,
-    verifyEmailVerificationCode,
 }

@@ -14,36 +14,18 @@ router.post("/registration/check/nickname/:nickname/exists", async (req, res) =>
 })
 
 router.post("/registration/send/email/code", async (req, res) => {
-    const body = JSON.parse(req.body)
+    const sendData = JSON.parse(req.body)
 
-    const result = await controller.sendEmailVerificationCode(email)
-
-    res.status(result.status)
-    res.send(result.answer)
-})
-
-router.post("/registration/send/phone/code", async (req, res) => {
-    const body = JSON.parse(req.body)
-
-    const result = await controller.sendPhoneVerificationCode(phoneNumber)
+    const result = await controller.sendEmailVerificationCode(sendData)
 
     res.status(result.status)
     res.send(result.answer)
 })
 
 router.post ("/registration/validate/email/code", async (req, res) => {
-    const body = JSON.parse(req.body)
+    const validateData = JSON.parse(req.body)
 
-    const result = await controller.validateEmailVerificationCode(email, code)
-
-    res.status(result.status)
-    res.send(result.answer)
-})
-
-router.post("/registration/validate/phone/code", async (req, res) => {
-    const body = JSON.parse(req.body)
-
-    const result = await controller.validatePhoneVerificationCode(phoneNumber, code)
+    const result = await controller.validateEmailVerificationCode(validateData)
 
     res.status(result.status)
     res.send(result.answer)
