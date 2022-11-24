@@ -23,7 +23,7 @@ class RegistrationController {
         })
     }
 
-    async sendEmailVerificationCode(email) {
+    async sendEmailVerificationCode(body) {
         const verificationRequestBody = {
             email: email
         }
@@ -38,7 +38,7 @@ class RegistrationController {
         })
     }
 
-    async sendPhoneVerificationCode(phoneNumber) {
+    async sendPhoneVerificationCode(body) {
         const verificationRequestBody = {
             phone_number: phoneNumber
         }
@@ -53,7 +53,7 @@ class RegistrationController {
         })
     }
 
-    async validateEmailVerificationCode(email, code) {
+    async validateEmailVerificationCode(body) {
         const validateRequestBody = {
             email: email,
             verification_code: code
@@ -69,7 +69,7 @@ class RegistrationController {
         })
     }
 
-    async validatePhoneVerificationCode(phone, code) {
+    async validatePhoneVerificationCode(body) {
         const validateRequestBody = {
             phone_number: phone,
             verification_code: code

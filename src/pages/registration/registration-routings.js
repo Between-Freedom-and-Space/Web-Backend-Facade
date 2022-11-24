@@ -14,7 +14,7 @@ router.post("/registration/check/nickname/:nickname/exists", async (req, res) =>
 })
 
 router.post("/registration/send/email/code", async (req, res) => {
-    const email = req.body["email"]
+    const body = JSON.parse(req.body)
 
     const result = await controller.sendEmailVerificationCode(email)
 
@@ -23,7 +23,7 @@ router.post("/registration/send/email/code", async (req, res) => {
 })
 
 router.post("/registration/send/phone/code", async (req, res) => {
-    const phoneNumber = req.body["phone_number"]
+    const body = JSON.parse(req.body)
 
     const result = await controller.sendPhoneVerificationCode(phoneNumber)
 
@@ -32,8 +32,7 @@ router.post("/registration/send/phone/code", async (req, res) => {
 })
 
 router.post ("/registration/validate/email/code", async (req, res) => {
-    const email = req.body["email"]
-    const code = req.body["email_code"]
+    const body = JSON.parse(req.body)
 
     const result = await controller.validateEmailVerificationCode(email, code)
 
@@ -42,8 +41,7 @@ router.post ("/registration/validate/email/code", async (req, res) => {
 })
 
 router.post("/registration/validate/phone/code", async (req, res) => {
-    const phoneNumber = req.body["phone_number"]
-    const code = req.body["code"]
+    const body = JSON.parse(req.body)
 
     const result = await controller.validatePhoneVerificationCode(phoneNumber, code)
 
@@ -52,7 +50,7 @@ router.post("/registration/validate/phone/code", async (req, res) => {
 })
 
 router.patch("/registration/register/user", async (req, res) => {
-    const userData = req.body
+    const userData = JSON.parse(req.body)
 
     const result = await controller.registerNewUserProfile(userData)
 
