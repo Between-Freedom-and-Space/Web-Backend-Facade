@@ -24,4 +24,13 @@ router.post("/authentication/authenticate", async (req, res) => {
     res.send(result.answer)
 })
 
+router.delete('/authentication/user/delete', async (req, res) => {
+    const token = req.header(AUTH_TOKEN_HEADER_NAME)
+
+    const result = await controller.deleteUser(token)
+
+    res.status(result.status)
+    res.send(result.answer)
+})
+
 export default router;
