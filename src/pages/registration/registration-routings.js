@@ -23,7 +23,7 @@ router.post("/registration/send/email/code", async (req, res) => {
 })
 
 router.post ("/registration/validate/email/code", async (req, res) => {
-    const validateData = JSON.parse(req.body)
+    const validateData = req.body
 
     const result = await controller.validateEmailVerificationCode(validateData)
 
