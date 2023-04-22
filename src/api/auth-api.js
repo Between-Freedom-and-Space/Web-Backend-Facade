@@ -8,7 +8,7 @@ const registerUser = async (params) => {
     const path = getBasePath() + "/user/register"
     const { body } = params
     return fetch(path, {
-        method: "POST",
+        method: "PATCH",
         body: JSON.stringify(body)
     })
 }
