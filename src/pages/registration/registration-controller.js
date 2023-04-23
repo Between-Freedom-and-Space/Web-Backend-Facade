@@ -2,7 +2,7 @@ import {authApiEndpoints} from "../../api/auth-api.js";
 import {mailingApiEndpoints} from "../../api/mailing-api.js";
 import {profilesApiEndpoints} from "../../api/profiles-api.js";
 import MultipleFetch from "multiple-fetch";
-import {parseResponse} from "../../api/parsers/api-result-parser.js";
+import {parseResponse, parseSeveralResponses} from "../../api/parsers/api-result-parser.js";
 
 class RegistrationController {
 
@@ -70,8 +70,11 @@ class RegistrationController {
                 }
             }))
             .synchronize()
-        return parseResponse(authResult, (response) => {
-            return response.body
+        return parseSeveralResponses([registerResult, authResult], (responses) => {
+            const registerResponse = responses[0].body
+            const authResponse = responses[1].body
+            authResponse.content.profile_id = registerResponse.content.profile_id
+            return authResponse
         })
     }
 }
