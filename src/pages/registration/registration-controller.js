@@ -49,12 +49,28 @@ class RegistrationController {
 
     async registerNewUserProfile(bodyData) {
         const registerFetch = authApiEndpoints.registerUser
+        const authFetch = authApiEndpoints.authenticateUser
         const multipleFetch = new MultipleFetch(this.#ENABLE_LOGS)
 
-        const result = await multipleFetch
+        const registerResult = await multipleFetch
             .run(() => registerFetch({ body: bodyData }))
             .synchronize()
-        return parseResponse(result, (response) => {
+        const registerResponse = parseResponse(registerResult, (response) => {
+            return response.body
+        })
+        if (registerResponse.status !== 200) {
+            return registerResponse
+        }
+
+        const authResult = await multipleFetch
+            .run(() => authFetch({
+                body: {
+                    nickname: bodyData.nickname,
+                    password_encoded: bodyData.password_encrypted
+                }
+            }))
+            .synchronize()
+        return parseResponse(authResult, (response) => {
             return response.body
         })
     }

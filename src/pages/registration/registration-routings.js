@@ -14,7 +14,7 @@ router.post("/registration/check/nickname/:nickname/exists", async (req, res) =>
 })
 
 router.post("/registration/send/email/code", async (req, res) => {
-    const sendData = JSON.parse(req.body)
+    const sendData = req.body
 
     const result = await controller.sendEmailVerificationCode(sendData)
 
@@ -32,7 +32,7 @@ router.post ("/registration/validate/email/code", async (req, res) => {
 })
 
 router.patch("/registration/register/user", async (req, res) => {
-    const userData = JSON.parse(req.body)
+    const userData = req.body
 
     const result = await controller.registerNewUserProfile(userData)
 
