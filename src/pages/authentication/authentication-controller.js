@@ -19,9 +19,9 @@ class AuthenticationController {
         })
     }
 
-    async authenticateUser(login, password) {
+    async authenticateUser(nickname, password) {
         const authenticateRequestBody = {
-            nickname: login,
+            nickname: nickname,
             password_encoded: password
         }
 
@@ -40,7 +40,7 @@ class AuthenticationController {
         }
 
         const myProfileResult = await multiplyFetch
-            .run(() => myProfileFetch({token: authResponse.content.access_token}))
+            .run(() => myProfileFetch({token: authResponse.answer.content.access_token}))
             .synchronize()
         return parseSeveralResponses([authResult, myProfileResult], (responses) => {
             const authResponse = responses[0].body
