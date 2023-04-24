@@ -18,6 +18,17 @@ const getAllProfiles = async (params) => {
     })
 }
 
+const getMyProfile = async (params) => {
+    const path = getBasePath() + "/my"
+    const { token } = params
+    return fetch(path, {
+        method: "GET",
+        headers: {
+            [AUTH_TOKEN_HEADER_NAME]: token
+        }
+    })
+}
+
 const checkProfileExists = async (params) => {
     const path = getBasePath() + "/exists"
     const { body } = params
@@ -234,6 +245,7 @@ const setProfileIcon = async (nickname, params) => {
 
 export const profilesApiEndpoints = {
     getAllProfiles,
+    getMyProfile,
     checkProfileExists,
     subscribeToProfile,
     unsubscribeFromProfile,
