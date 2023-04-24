@@ -9,7 +9,17 @@ router.get("/profile/:nickname", async (req, res) => {
     const nickname = req.params["nickname"]
     const token = req.header(AUTH_TOKEN_HEADER_NAME)
 
-    const result = await controller.getFullProfileInformation(nickname, token)
+    const result = await controller.getFullProfileInformationByNickname(nickname, token)
+
+    res.status(result.status)
+    res.send(result.answer)
+})
+
+router.get("/profile/by-id/:id", async (req, res) => {
+    const id = req.params["id"]
+    const token = req.header(AUTH_TOKEN_HEADER_NAME)
+
+    const result = await controller.getProfileFullInformationById(id, token)
 
     res.status(result.status)
     res.send(result.answer)

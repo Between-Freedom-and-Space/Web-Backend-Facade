@@ -7,7 +7,7 @@ class ProfileController {
 
     #ENABLE_LOGS = process.env.ENABLE_LOGS
 
-    async getFullProfileInformation(nickname, token) {
+    async getFullProfileInformationByNickname(nickname, token) {
         const getProfilePostsBody = {
             page_number: 1,
             page_size: 10
@@ -43,6 +43,48 @@ class ProfileController {
                 {alias: 'profile_subscriptions_count', answer: responses[2].body},
                 {alias: 'profile_posts', answer: responses[3].body}
             ])
+        })
+    }
+
+    async getProfileFullInformationById(id, token) {
+        const getProfilePostsBody = {
+            page_number: 1,
+            page_size: 10
+        }
+
+        const getProfileFetch = profilesApiEndpoints.getProfileById
+        const getSubscribersCountFetch = profilesApiEndpoints.getProfileSubscribersCountById
+        const getSubscriptionsCountFetch = profilesApiEndpoints.getProfileSubscriptionsCountById
+        const getProfilePostsFetch = profilesApiEndpoints.getProfilePostsById
+        const multiFetch = new MultipleFetch(this.#ENABLE_LOGS)
+
+        const profileAsync = multiFetch
+            .run(() => getProfileFetch(id, {token}))
+        const subscribersCountAsync = multiFetch
+            .run(() => getSubscribersCountFetch(id, {token}))
+        const subscriptionsCountAsync = multiFetch
+            .run(() => getSubscriptionsCountFetch(id, {token}))
+        const profilePostsAsync = multiFetch
+            .run(() => getProfilePostsFetch(id, {token, body: getProfilePostsBody}))
+
+        const profileResult = await profileAsync.synchronize()
+        const subscribersCountResult = await subscribersCountAsync.synchronize()
+        const subscriptionsCountResult = await subscriptionsCountAsync.synchronize()
+        const profilePostsResult = await profilePostsAsync.synchronize()
+
+        return parseSeveralResponses([
+            profileResult, subscribersCountResult,
+            subscriptionsCountResult, profilePostsResult
+        ], (responses) => {
+            const profileBody = responses[0].body
+            const subscribersCount = responses[1].body.content
+            const subscriptionsCount = responses[2].body.content
+            const posts = responses[3].body.content
+
+            profileBody.content.subscribers_count = subscribersCount
+            profileBody.content.subscriptions_count = subscriptionsCount
+            profileBody.content.posts = posts
+            return profileBody
         })
     }
 
