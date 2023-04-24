@@ -53,6 +53,7 @@ class ProfileController {
         }
 
         const getProfileFetch = profilesApiEndpoints.getProfileById
+        const getMyProfileFetch = profilesApiEndpoints.getMyProfile
         const getSubscribersCountFetch = profilesApiEndpoints.getProfileSubscribersCountById
         const getSubscriptionsCountFetch = profilesApiEndpoints.getProfileSubscriptionsCountById
         const getProfilePostsFetch = profilesApiEndpoints.getProfilePostsById
@@ -60,6 +61,8 @@ class ProfileController {
 
         const profileAsync = multiFetch
             .run(() => getProfileFetch(id, {token}))
+        const myProfileAsync = multiFetch
+            .run(() => getMyProfileFetch({token}))
         const subscribersCountAsync = multiFetch
             .run(() => getSubscribersCountFetch(id, {token}))
         const subscriptionsCountAsync = multiFetch
@@ -68,22 +71,25 @@ class ProfileController {
             .run(() => getProfilePostsFetch(id, {token, body: getProfilePostsBody}))
 
         const profileResult = await profileAsync.synchronize()
+        const myProfileResult = await myProfileAsync.synchronize()
         const subscribersCountResult = await subscribersCountAsync.synchronize()
         const subscriptionsCountResult = await subscriptionsCountAsync.synchronize()
         const profilePostsResult = await profilePostsAsync.synchronize()
 
         return parseSeveralResponses([
-            profileResult, subscribersCountResult,
+            profileResult, myProfileResult, subscribersCountResult,
             subscriptionsCountResult, profilePostsResult
         ], (responses) => {
             const profileBody = responses[0].body
-            const subscribersCount = responses[1].body.content
-            const subscriptionsCount = responses[2].body.content
-            const posts = responses[3].body.content
+            const myProfileBody = responses[1].body
+            const subscribersCount = responses[2].body.content
+            const subscriptionsCount = responses[3].body.content
+            const posts = responses[4].body.content
 
             profileBody.content.subscribers_count = subscribersCount
             profileBody.content.subscriptions_count = subscriptionsCount
             profileBody.content.posts = posts
+            profileBody.content.is_user_profile = myProfileBody.content.profile_id === profileBody.content.profile_id
             return profileBody
         })
     }
