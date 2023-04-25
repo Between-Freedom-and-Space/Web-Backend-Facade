@@ -15,10 +15,19 @@ router.post("/authentication/refresh/access/token", async (req, res) => {
 })
 
 router.post("/authentication/authenticate", async (req, res) => {
-    const login = req.body["login"]
+    const nickname = req.body["nickname"]
     const passwordEncoded = req.body["password_encoded"]
 
-    const result = await controller.authenticateUser(login, passwordEncoded)
+    const result = await controller.authenticateUser(nickname, passwordEncoded)
+
+    res.status(result.status)
+    res.send(result.answer)
+})
+
+router.delete('/authentication/user/delete', async (req, res) => {
+    const token = req.header(AUTH_TOKEN_HEADER_NAME)
+
+    const result = await controller.deleteUser(token)
 
     res.status(result.status)
     res.send(result.answer)

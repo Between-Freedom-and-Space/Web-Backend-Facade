@@ -1,5 +1,7 @@
 import express from 'express'
+import morgan from 'morgan'
 import dotenv from 'dotenv'
+import cors from 'cors'
 import prometheusMiddleware from 'express-prometheus-middleware'
 import postRouter from "../pages/post/post-routings.js";
 import registrationRouter from "../pages/registration/registration-routings.js";
@@ -13,6 +15,7 @@ import profileSettingsRouter from "../pages/profile-settings/profile-settings-ro
 import profileSubscribersRouter from "../pages/profile-subscribers/profile-subscribers-routing.js";
 import profileSubscriptionsRouter from "../pages/profile-subscriptions/profile-subscriptions-routings.js";
 import searchRouter from "../pages/search/search-routings.js"
+import {errorHandlerMiddleware} from "../common/middleware/error-handler.js";
 
 dotenv.config()
 
@@ -36,6 +39,11 @@ const serverRoutes = [
 ]
 
 app.use(express.json())
+app.use(morgan('combined'))
+app.use(errorHandlerMiddleware)
+app.use(cors({
+    origin: '*'
+}))
 app.use(serverRoutes)
 
 app.use(prometheusMiddleware({

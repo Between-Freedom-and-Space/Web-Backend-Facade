@@ -18,6 +18,28 @@ const getAllProfiles = async (params) => {
     })
 }
 
+const getMyProfile = async (params) => {
+    const path = getBasePath() + "/my"
+    const { token } = params
+    return fetch(path, {
+        method: "GET",
+        headers: {
+            [AUTH_TOKEN_HEADER_NAME]: token
+        }
+    })
+}
+
+const getProfileById = async (id, params) => {
+    const path = getBasePath() + `/by-id/${id}`
+    const { token } = params
+    return fetch(path, {
+        method: "GET",
+        headers: {
+            [AUTH_TOKEN_HEADER_NAME]: token
+        }
+    })
+}
+
 const checkProfileExists = async (params) => {
     const path = getBasePath() + "/exists"
     const { body } = params
@@ -95,8 +117,30 @@ const getProfileSubscriptionsCount = async (nickname, params) => {
     })
 }
 
+const getProfileSubscriptionsCountById = async (id, params) => {
+    const path = getBasePath() + `/by-id/${id}/subscriptions/count`
+    const { token } = params
+    return fetch(path, {
+        method: "GET",
+        headers: {
+            [AUTH_TOKEN_HEADER_NAME]: token
+        }
+    })
+}
+
 const getProfileSubscribersCount = async (nickname, params) => {
     const path = getBasePath() + `/${nickname}/subscribers/count`
+    const { token } = params
+    return fetch(path, {
+        method: "GET",
+        headers: {
+            [AUTH_TOKEN_HEADER_NAME]: token
+        }
+    })
+}
+
+const getProfileSubscribersCountById = async (id, params) => {
+    const path = getBasePath() + `/by-id/${id}/subscribers/count`
     const { token } = params
     return fetch(path, {
         method: "GET",
@@ -111,6 +155,18 @@ const getProfilePosts = async (nickname, params) => {
     const { token, body } = params
     return fetch(path, {
         method: "GET",
+        headers: {
+            [AUTH_TOKEN_HEADER_NAME]: token
+        },
+        body: JSON.stringify(body)
+    })
+}
+
+const getProfilePostsById = async (id, params) => {
+    const path = getBasePath() + `/by-id/${id}/posts`
+    const { token, body } = params
+    return fetch(path, {
+        method: "POST",
         headers: {
             [AUTH_TOKEN_HEADER_NAME]: token
         },
@@ -234,6 +290,8 @@ const setProfileIcon = async (nickname, params) => {
 
 export const profilesApiEndpoints = {
     getAllProfiles,
+    getMyProfile,
+    getProfileById,
     checkProfileExists,
     subscribeToProfile,
     unsubscribeFromProfile,
@@ -241,8 +299,11 @@ export const profilesApiEndpoints = {
     getProfileSubscriptions,
     getProfileSubscribers,
     getProfileSubscriptionsCount,
+    getProfileSubscriptionsCountById,
     getProfileSubscribersCount,
+    getProfileSubscribersCountById,
     getProfilePosts,
+    getProfilePostsById,
     getProfileComments,
     getProfileTags,
     getProfilePostReactions,

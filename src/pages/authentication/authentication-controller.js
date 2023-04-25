@@ -1,6 +1,7 @@
 import {authApiEndpoints} from "../../api/auth-api.js";
 import MultipleFetch from "multiple-fetch";
-import {parseResponse} from "../../api/parsers/api-result-parser.js";
+import {parseResponse, parseSeveralResponses} from "../../api/parsers/api-result-parser.js";
+import {profilesApiEndpoints} from "../../api/profiles-api.js";
 
 class AuthenticationController {
 
@@ -18,21 +19,39 @@ class AuthenticationController {
         })
     }
 
-    async authenticateUser(login, password) {
+    async authenticateUser(nickname, password) {
         const authenticateRequestBody = {
-            nickname: login,
+            nickname: nickname,
             password_encoded: password
         }
 
-        const authenticateFetch = authApiEndpoints.authenticateUser
+        const authFetch = authApiEndpoints.authenticateUser
+        const myProfileFetch = profilesApiEndpoints.getMyProfile
         const multiplyFetch = new MultipleFetch(this.#ENABLE_LOGS)
 
-        const fetchResult = await multiplyFetch
-            .run(() => authenticateFetch({body: authenticateRequestBody}))
+        const authResult = await multiplyFetch
+            .run(() => authFetch({body: authenticateRequestBody}))
             .synchronize()
-        return parseResponse(fetchResult, (result) => {
+        const authResponse = parseResponse(authResult, (result) => {
             return result.body
         })
+        if (authResponse.status !== 200) {
+            return authResponse
+        }
+
+        const myProfileResult = await multiplyFetch
+            .run(() => myProfileFetch({token: authResponse.answer.content.access_token}))
+            .synchronize()
+        return parseSeveralResponses([authResult, myProfileResult], (responses) => {
+            const authResponse = responses[0].body
+            const myProfileResponse = responses[1].body
+            authResponse.content.profile_id = myProfileResponse.content.profile_id
+            return authResponse
+        })
+    }
+
+    async deleteUser(token) {
+
     }
 }
 
