@@ -45,7 +45,7 @@ const getPostComments = async (id, params) => {
     const path = getBasePath() + `/${id}/comments`
     const { token, body } = params
     return fetch(path, {
-        method: "GET",
+        method: "POST",
         headers: {
             [AUTH_TOKEN_HEADER_NAME]: token
         },
@@ -91,7 +91,7 @@ const getPostTags = async (id, params) => {
     const path = getBasePath() + `/${id}/tags`
     const { token, body } = params
     return fetch(path, {
-        method: "GET",
+        method: "POST",
         headers: {
             [AUTH_TOKEN_HEADER_NAME]: token
         },
